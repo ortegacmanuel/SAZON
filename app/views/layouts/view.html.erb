@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sazon</title>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= stylesheet_link_tag "application" %>
+    <%= csrf_meta_tags %>
+    <script>/* foo */</script>
+  </head>
+
+  <body>
+    <div id="sazon_outer_container">
+      <%= yield %>
+    </div>
+    <div id="sazon_footer">
+      Tekst en Ontwerp: Copyright © 2011-2017 FMS / ID-arte, Software: © 2011-2017 Suares &amp; Co, Licensed under the MIT license.
+    </div>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js", 'data-turbolinks-track' => true %>
+    <script>
+      <%= yield :javascript %>
+    </script>
+  </body>
+</html>

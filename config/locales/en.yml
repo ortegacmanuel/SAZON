@@ -1,0 +1,37 @@
+en:
+  ja: ja
+  nee: nee
+  aan: aan
+  uit: uit
+  left: links
+  right: rechts
+  none: niet tonen in menu
+  activerecord:
+    models:
+      documents: documenten
+      begrips: begrippen
+    attributes:
+      image:
+        lightbox_show_picture: toon plaatje in lightbox
+      begrip:
+        name: begrip
+        description: beschrijving
+        synonym: synoniemen. Indien meerdere, zet er een ',' tussen!
+      document:
+        name: interne naam, bepaalt volgorde
+        slug: naam voor url
+        css: custom css, werkt alleen in 'sazon'
+        which_menu: toon in menu
+        document: valt onder...
+        header_content: titel, hoofdtekst en rechterkolom
+        title: titel
+        content: hoofdtekst
+        sidebar: tekst rechterkolom
+        assignments: opdrachten
+        documents: subdocumenten
+        header_masonry: masonry (plaatjes)
+        masonry_title_above: title boven masonry
+        masonry_text_above: tekst boven masonry
+        masonry_column_width: breedte van plaatjes
+        masonry_gutter_width: ruimte tussen twee plaatjes
+        images: plaatjes

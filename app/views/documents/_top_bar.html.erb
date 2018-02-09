@@ -1,0 +1,91 @@
+<div class="fixed contain-to-grid" id="sazon_top_bar_container">
+  <nav id="sazon_top_bar" class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name" id="inline_forms_menu">
+        <h1>
+          <a href="/view/sazon">
+            <%= image_tag 'logo_sazon.png' %>
+          </a>
+        </h1>
+      </li>
+      <li class="toggle-topbar menu-icon">
+        <a href="#"><span>menu</span></a>
+      </li>
+    </ul>
+    <section class="top-bar-section">
+      <% this_module = @document.this_module %>
+      <% this_chapter = @document.this_chapter %>
+      <ul class="left">
+        <li class="has-dropdown"><%= link_to Document.find(ROOT_ID).title, "/view/#{Document.find(ROOT_ID).slug}" %>
+          <ul class="dropdown" tabindex="-1">
+            <% Document.find(ROOT_ID).documents.where(which_menu: 1).each do |document| %>
+            <li<%= " class=active" if document.id == this_module.id %>>
+              <%= link_to document.nice_title, "/view/#{document.slug}" %>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+        <% unless this_module.is_root? || @document.which_menu > 1 %>
+          <% if this_module.documents.empty? %>
+            <li>
+              <%= link_to this_module.nice_title, "/view/#{this_module.slug}" %>
+            </li>
+          <% else %>
+            <li class="has-dropdown"><%= link_to this_module.nice_title, "/view/#{this_module.slug}" %>
+              <ul class="dropdown" tabindex="-1">
+                <% this_module.documents.each do |document| %>
+                <li<%= " class=active" if document.id == this_chapter.id %>>
+                  <%= link_to document.nice_title, "/view/#{document.slug}" %>
+                </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        <% end %>
+        <% unless this_chapter.is_root? %>
+          <% if this_chapter.children.empty? %>
+            <li>
+              <%= link_to this_chapter.nice_title, "/view/#{this_chapter.slug}" %>
+            </li>
+          <% else %>
+            <li class="has-dropdown">
+              <%= link_to this_chapter.nice_title, "/view/#{this_chapter.slug}" %>
+              <ul class="dropdown" tabindex="-1">
+                <% this_chapter.children.flatten.each do |document| %>
+                <li<%= " class=active" if document.id == @document.id %>>
+                  <%= link_to document.nice_title, "/view/#{document.slug}" %>
+                </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+      <ul class="right">
+        <li class="has-dropdown"><a>meer...</a>
+          <ul class="dropdown" tabindex="-1">
+            <% Document.find(ROOT_ID).documents.where(which_menu: 3).each do |document| %>
+            <li<%= " class=active" if document.id == this_module.id %>>
+              <%= link_to document.nice_title, "/view/#{document.slug}" %>
+            </li>
+            <% end %>
+            <li>
+              <%= link_to('Download PDF', "/view/#{@document.slug}.pdf") %>
+            </li>
+            <li>
+              <%= link_to('<em>uitloggen</em>'.html_safe, destroy_user_session_path, method: :delete) %>
+            </li>
+            <% if current_user.role?(:superadmin) || current_user.role?(:admin) %>
+              <% %w(documents begrips assignments users).each do |model| %>
+                <li>
+                  <%= link_to "-> #{model}", send("#{model}_path") %>
+                </li>
+              <% end %>
+            <% end %>
+
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </nav>
+</div>

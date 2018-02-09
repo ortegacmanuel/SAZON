@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Sazon</title>
+    <%= stylesheet_link_tag "pdf" %>
+
+    <script>/* foo */</script>
+  </head>
+
+  <body>
+    <div id="sazon_pdf_header">
+      <%= image_tag 'logo_sazon.png' %>
+    </div>
+    <div id="sazon_pdf_outer_container">
+      <%= yield %>
+    </div>
+    <div id="sazon_pdf_footer">
+      Tekst en Ontwerp: Copyright © 2011-2017 FMS / ID-arte, Software: © 2011-2017 Suares &amp; Co, Licensed under the MIT license.
+    </div>
+  </body>
+</html>

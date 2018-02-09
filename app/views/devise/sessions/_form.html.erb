@@ -1,0 +1,26 @@
+<%= form_for(resource,  as:  resource_name,
+                        url: session_path(resource_name),
+                        html: { id:  'inline_forms_devise_form' }
+            ) do |f| %>
+
+  <div class="row">
+    <div class="columns">
+      <label>school of gebruikersnaam</label>
+      <%= f.text_field :name %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns">
+      <label>wachtwoord</label>
+      <%= f.password_field :password %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="columns text-right">
+      <%= f.submit :login, class: 'button' %>
+    </div>
+  </div>
+
+<% end %>

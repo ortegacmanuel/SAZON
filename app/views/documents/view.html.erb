@@ -1,0 +1,133 @@
+<%= render 'top_bar' %>
+<div class="row content_container">
+  <div class="content_area column medium-8 large-9">
+    <div class="row navigation">
+      <div class="right">
+        <%= link_to image_tag('previous.png', id: "previous_button"), "/view/#{@document.previous.slug}" unless @document.previous.nil? %>
+        <%= link_to image_tag('next.png', id: "next_button"), "/view/#{@document.next.slug}" unless @document.next.nil? %>
+      </div>
+    </div>
+
+    <% if @document.masonry_title_above == JA_NEE.key('ja') %>
+      <div class="row content_area_title_above">
+        <h1 class="title">
+          <%= @document.nice_title %>
+        </h1>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_text_above == JA_NEE.key('ja') %>
+      <div class="row content_area_text_above">
+          <%= raw @content %>
+      </div>
+    <% end %>
+
+    <% if @document.id == 33 # begrippen %>
+      <div class="row content_area_begrippen">
+        <% Begrip.order(:name).each do |begrip| %>
+          <div class="row begrip_row">
+            <div class="column begrip_name small-2">
+              <%= begrip.name %>
+            </div>
+            <div class="column begrip_description small-9">
+              <%= begrip.description.html_safe %>
+              <% unless begrip.synonym.blank? %>
+                <br /><br /><span class="begrip_synoniem">Synoniemen: <%= begrip.synonym %></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+     <% end %>
+
+    <% unless @document.images.empty? %>
+      <div class="row masonry_area">
+        <div class="masonry" data-masonry='{ "itemSelector": ".masonry_image", "columnWidth": <%= @masonry_column_width %> }'>
+          <% @document.images.all.each do |image| %>
+            <%  if image.lightbox_show_picture == JA_NEE.key('nee')
+                  image_url = '/no-picture.png'
+                else
+                  image_url = image.image_url
+                end
+            %>
+            <a class="masonry_image_link" data-title="<%= add_tooltips image.description, 'html', true %>" href="<%= image_url %>" data-lightbox="masonry_images_<%= @document.id %>">
+              <%= image_tag image.image_url, width: @masonry_picture_width, class: "masonry_image" %>
+            </a>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_title_above == JA_NEE.key('nee') %>
+      <div class="row content_area_title_below">
+        <h1 class="title">
+          <%= @document.nice_title %>
+        </h1>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_text_above == JA_NEE.key('nee') %>
+      <div class="row content_area_text_below">
+          <%= raw @content %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="sidebar_area column medium-4 large-3">
+
+    <% unless @document.sidebar.blank? %>
+      <div class="row sidebar">
+        <%= raw @document.sidebar %>
+      </div>
+    <% end %>
+
+    <% unless @document.assignments.empty? %>
+      <div class="row assignments">
+        <h3>OPDRACHT</h3>
+        <ul>
+          <% @document.assignments.each do |assignment| %>
+            <li>
+              <%= assignment.title %> <a href="#" data-reveal-id="assignment_<%= assignment.id %>">&gt;&gt;</a>
+              <div id="assignment_<%= assignment.id %>" class="reveal-modal assignment" data-reveal aria-labelledby="assignment_title_<%= assignment.id %>" aria-hidden="true" role="dialog">
+                <h2 id="assignment_title_<%= assignment.id %>">
+                  <%= assignment.title %>
+                </h2>
+                <div class="assignment_content">
+                  <%= raw assignment.content %>
+                </div>
+                <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% unless @document.id == 33 # begrippen %>
+      <% begrips = @document.begrips
+         begrips = Begrip.where(name: begrips) %>
+      <% unless begrips.empty? %>
+        <div class="row begrippen">
+          <h3>BEGRIPPEN</h3>
+          <ul>
+            <% begrips.each do |begrip| %>
+              <li>
+                <span data-tooltip data-options="hover_delay: 10;" aria-haspopup="true" class="has-tip tip-bottom radius" title="
+                <%= begrip.description %>
+                <%= begrip.synonym.blank? ? '' : "<br /><br />Synoniemen: #{begrip.synonym}" %>
+                "><%= begrip.name %></span>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+<% content_for :javascript do %>
+  // Needed reinitialization in order to fix overlapping item elements
+  $( window ).load(function() {
+    $('.masonry_area').masonry({ "itemSelector": ".masonry_image", "columnWidth": <%= @masonry_column_width %>, gutter: 1 })
+  });
+<% end %>

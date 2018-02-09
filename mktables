@@ -1,0 +1,12 @@
+#!/bin/bash
+# monster
+
+rails g inline_forms Document \
+	name:string \
+	title:string \
+	content:text \
+	documents:has_many \
+	_enabled:yes \
+	_presentation:'#{first_name} #{last_name}' \
+	_order:last_name -f
+

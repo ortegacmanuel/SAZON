@@ -1,0 +1,116 @@
+<div class="row content_container">
+  <div class="content_area column medium-8 large-9">
+
+    <% if @document.masonry_title_above == JA_NEE.key('ja') %>
+      <div class="row content_area_title_above">
+        <h1 class="title">
+          <%= @document.nice_title %>
+        </h1>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_text_above == JA_NEE.key('ja') %>
+      <div class="row content_area_text_above">
+          <%= raw @content %>
+      </div>
+    <% end %>
+
+    <% unless @document.images.empty? %>
+      <div class="row pdf_masonry_area">
+        <% @document.images.all.each do |image| %>
+          <%  if image.lightbox_show_picture == JA_NEE.key('nee')
+                image_url = '/no-picture.png'
+              else
+                image_url = image.image_url
+              end
+          %>
+          <%= image_tag image.image_url, width: @masonry_picture_width, class: "pdf_masonry_image" %>
+          <% html_doc = Nokogiri::HTML(image.description) %>
+          <% html_doc.search('.//img').remove %>
+          <% html_doc.search('.//iframe').each do |iframe|
+              new_node = html_doc.create_element "span"
+              new_node.inner_html = "Video: #{iframe.attributes['src'].value.split('?').first rescue ''}"
+              iframe.replace new_node
+            end %>
+          <div class="pdf_masonry_content">
+            <%= raw html_doc.at('body').inner_html rescue '' %>
+          </div>
+          <div style="clear: both;"></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_title_above == JA_NEE.key('nee') %>
+      <div class="row content_area_title_below">
+        <h1 class="title">
+          <%= @document.nice_title %>
+        </h1>
+      </div>
+    <% end %>
+
+    <% if @document.masonry_text_above == JA_NEE.key('nee') %>
+      <div class="row content_area_text_below">
+          <%= raw @content %>
+      </div>
+    <% end %>
+
+  </div>
+
+  <div class="sidebar_area column medium-4 large-3">
+
+    <% unless @document.sidebar.blank? %>
+      <div class="row sidebar">
+        <% html_doc = Nokogiri::HTML(@document.sidebar) %>
+        <% html_doc.search('.//iframe').each do |iframe|
+            new_node = html_doc.create_element "span"
+            new_node.inner_html = "Video: #{iframe.attributes['src'].value.split('?').first rescue ''}"
+            iframe.replace new_node
+          end %>
+        <%= raw html_doc.at('body').inner_html rescue '' %>
+      </div>
+    <% end %>
+
+    <% unless @document.assignments.empty? %>
+      <div class="row assignments">
+        <h3>OPDRACHT</h3>
+        <ul>
+          <% @document.assignments.each do |assignment| %>
+            <li>
+              <h2 id="assignment_title_<%= assignment.id %>">
+                <%= assignment.title %>
+              </h2>
+              <div class="assignment_content">
+                <% html_doc = Nokogiri::HTML(assignment.content) %>
+                <% html_doc.search('.//iframe').each do |iframe|
+                    new_node = html_doc.create_element "span"
+                    new_node.inner_html = "Video: #{iframe.attributes['src'].value.split('?').first rescue ''}"
+                    iframe.replace new_node
+                  end %>
+                <%= raw html_doc.at('body').inner_html rescue '' %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% unless @document.id == 33 # begrippen %>
+      <% begrips = @document.begrips
+         begrips = Begrip.where(name: begrips) %>
+      <% unless begrips.empty? %>
+        <div class="row begrippen">
+          <h3>BEGRIPPEN</h3>
+          <ul>
+            <% begrips.each do |begrip| %>
+              <li>
+                <h2><%= begrip.name %></h2>
+                <%= begrip.description.html_safe %>
+                <%= begrip.synonym.blank? ? '' : "<br /><br />Synoniemen: #{begrip.synonym}" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

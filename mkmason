@@ -1,0 +1,12 @@
+#!/bin/bash
+# monster
+
+rails g inline_forms Assignment \
+	name:string \
+	title:string \
+	content:text \
+	document:belongs_to \
+	_enabled:yes \
+	_presentation:'#{name}' \
+	_order:name -f
+

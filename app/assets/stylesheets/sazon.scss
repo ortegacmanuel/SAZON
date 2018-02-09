@@ -1,0 +1,230 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic);
+
+@import 'lightbox';
+
+body {
+  background: rgba(0, 0, 0, 0) url("https://sazon.id-arte.net/uploads/ckeditor/pictures/17/content_bg-left.jpg") no-repeat fixed 0 0 / 55% auto;
+}
+#sazon_outer_container {
+  background: rgba(0, 0, 0, 0) url("https://sazon.id-arte.net/uploads/ckeditor/pictures/21/content_bg-right.jpg") no-repeat fixed right 0 / 49% auto;
+  margin-bottom: 0;
+
+  p, div {
+    font-size: 0.85rem!important;
+    margin-bottom: 1.25rem;
+  }
+
+  .column {
+    padding: 40px!important;
+  }
+
+  h1 {
+    font-size: 1.8rem!important}
+
+  h2 {
+    font-size: 1.5rem!important;
+  }
+
+  h3 {
+    font-size: 1.2rem!important;
+  }
+
+  h4 {
+    font-size: 1rem!important;
+  }
+
+  h5 {
+    font-size: 0.9rem!important;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    font-family: "Dosis";
+  }
+
+  ul, ol, dl {
+    font-family: inherit;
+    font-size: 0.8rem;
+  }
+}
+
+nav#sazon_top_bar, #sazon_top_bar_container {
+  background: #5f3557 none repeat scroll 0 0!important;
+}
+
+.content_area.column.medium-8.large-9 {
+  background: white none repeat scroll 0 0;
+  padding-top:0!important;
+  margin-bottom:0;
+  min-height: 100vh;
+}
+
+.sidebar_area h3 {
+  color: #a60c8e;
+}
+
+.row.navigation {
+  height: 60px;
+  margin-top: -40px;
+}
+
+.row.sidebar {
+  background: rgba(255, 255, 255, 0.70) none repeat scroll 0 0;
+  border-radius: 0;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.row.assignments {
+  background: rgba(255, 255, 255, 0.70) none repeat scroll 0 0;
+  border: 4px solid #3a5182;
+  border-radius: 25px 25px 25px 0;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.row.begrippen {
+  background: rgba(255, 255, 255, 0.70) none repeat scroll 0 0;
+  border: 4px solid #7a3372;
+  border-radius: 25px 25px 25px 0;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+
+.quote {
+  border-left: 10px solid #3a5182;
+  margin-bottom: 35px;
+  min-height: 120px;
+  padding: 0 0 0 20px;
+}
+
+.quote2 {
+  border-left: 10px solid #3a5182;
+  margin-bottom: 35px;
+  padding: 0 0 0 20px;
+  font-style: italic;
+}
+
+#previous_button {
+  float: left;
+  height: 45px;
+}
+
+#next_button {
+  float: right;
+  height: 45px;
+}
+
+.right {
+  margin: 0 -3%;
+  padding: 10px;
+  width: 106%;
+}
+
+#sazon_footer {
+  background: #3a5182 none repeat scroll 0 0;
+  color: lightgrey;
+  font-size: 10px!important;
+  padding: 10px 30px;
+  text-align: right;
+  margin-bottom:0;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.has-tip {
+  color: #666666;
+  cursor: help;
+  font-style: italic;
+}
+
+.top-bar-section li.active:not(.has-form) a:not(.button) {
+  background: #b01f93 none repeat scroll 0 0;
+}
+
+.top-bar-section li.active:not(.has-form) a:hover:not(.button) {
+  background: #cc11a7 none repeat scroll 0 0;
+}
+
+.masonry_image {
+  margin-top: 10px !important;
+}
+
+#lightbox h1, #lightbox h2, #lightbox h3, #lightbox h4, #lightbox h5, #lightbox h6 {
+  color: white;
+}
+
+.lightboxOverlay {
+  opacity: 0.95;
+}
+
+.lb-nav {
+  background: #333333 none repeat scroll 0 0;
+}
+
+.lb-nav a.lb-next, .lb-nav a.lb-prev {
+  opacity:100;
+}
+
+#intro .controls.controls-outro {
+  display: none;
+}
+
+/*------------------------------------------------*/
+/*-embed styles from http://embedresponsively.com-*/
+/*------------------------------------------------*/
+
+.embed-container {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.embed-container iframe, .embed-container object, .embed-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/*------------------------------------------------*/
+/*-------------------[MEDIA QUERIES]--------------*/
+/*------------------------------------------------*/
+
+
+// Small screens
+@media only screen and (max-width: 40em) {
+  body {
+    background: #ffffff!important;
+  }
+
+  #sazon_outer_container {
+    background: #ffffff;
+  }
+
+  .row.sidebar {
+    background: #dde2ed none repeat scroll 0 0;
+  }
+
+  #sazon_footer {
+    position: relative;
+   }
+ } /* max-width 640px, mobile-only styles, use when QAing mobile issues */
+
+// Medium screens
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  body {
+    background: #ffffff!important;
+  }
+
+  #sazon_outer_container {
+     background: rgba(0, 0, 0, 0) url("https://sazon.id-arte.net/uploads/ckeditor/pictures/21/content_bg-right.jpg") no-repeat fixed right 16% / 90%;
+     margin-bottom: 0;
+   }
+ } /* min-width 641px and max-width 1024px, use when QAing tablet-only issues */

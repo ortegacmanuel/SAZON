@@ -1,0 +1,8 @@
+en:
+  application_name: SAZON
+  inline_forms:
+    general:
+      application_title: SAZON
+    devise:
+      title_for_devise: SAZON
+      welcome: Welkom bij Sazon!
