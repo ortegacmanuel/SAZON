@@ -6,47 +6,57 @@ Rails.application.routes.draw do
 
   resources :images do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   resources :begrips do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   resources :assignments do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   resources :documents do
     post 'revert', on: :member
+    get 'list_versions', :on => :member
     get  'view',   on: :member, as: :view
   end
 
   resources :inline_forms_translations do
+    get 'list_versions', :on => :member
     post 'revert', :on => :member
   end
 
   resources :inline_forms_keys do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   resources :inline_forms_locales do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   mount Ckeditor::Engine => '/ckeditor'
 
   resources :roles do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   resources :locales do
     post 'revert', :on => :member
+    get 'list_versions', :on => :member
   end
 
   devise_for :users, :path_prefix => 'auth'
 
   resources :users do
-      post 'revert', :on => :member
+    post 'revert', :on => :member
+    get 'list_versions', :on => :member      
   end
 
 
