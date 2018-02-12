@@ -152,7 +152,7 @@ GEM
       activesupport (>= 4.2.0)
     i18n (0.9.4)
       concurrent-ruby (~> 1.0)
-    inline_forms (5.1.0)
+    inline_forms (5.1.1)
       rails (>= 5.0)
       rails-i18n
       rvm
@@ -363,7 +363,7 @@ DEPENDENCIES
   foundation-icons-sass-rails
   foundation-rails (~> 5.5)
   i18n-active_record!
-  inline_forms (>= 5)
+  inline_forms (~> 5.1)
   jquery-rails
   jquery-timepicker-rails
   jquery-ui-sass-rails
