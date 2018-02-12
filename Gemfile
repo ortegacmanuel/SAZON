@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 # created by inline_forms 5.0.16
 
-gem 'rails', '~> 5.0.2'
+gem 'rails', '~> 5.1.4'
 gem 'rake'
 gem 'jquery-rails'
 gem 'jquery-ui-sass-rails'
 gem 'will_paginate'
-gem 'tabs_on_rails', git: 'https://github.com/acesuares/tabs_on_rails.git', branch: 'update_remote'
-gem 'ckeditor'
+gem 'tabs_on_rails'
+gem 'ckeditor', github: 'galetahub/ckeditor'
 gem 'cancancan', '~> 2.0'
 gem 'carrierwave'
 gem 'remotipart', '~> 1.0'
