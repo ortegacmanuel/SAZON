@@ -24,3 +24,12 @@ Things you may want to cover:
 * ...
 # CAV
 # SAZON
+
+
+## Run the tests with:
+
+```bundle install
+rails RACK_ENV=test db:create
+rails RACK_ENV=test db:schema:load
+bundle exec rspec
+```
