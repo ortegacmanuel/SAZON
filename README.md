@@ -28,9 +28,7 @@ Things you may want to cover:
 
 ## Run the tests with:
 
-``
-bundle install
+```bundle install
 rails RACK_ENV=test db:create
 rails RACK_ENV=test db:schema:load
-bundle exec rspec
-``
+bundle exec rspec```
