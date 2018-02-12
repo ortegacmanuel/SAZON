@@ -54,7 +54,7 @@ Devise.setup do |config|
   config.strip_whitespace_keys = [:name]
 
 
-  config.secret_key = ''
+  config.secret_key = ENV["DEVISE_SECRET_KEY"]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
