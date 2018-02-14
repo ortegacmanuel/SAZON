@@ -18,6 +18,10 @@ class Ability
         can :access_but_not_delete, :all
         can :view, Document
         can :destroy, [Begrip, Assignment, Image]
+        can :access, :ckeditor   # needed to access Ckeditor filebrowser
+        # Performed checks for actions:
+        can [:read, :create, :destroy], Ckeditor::Picture
+        can [:read, :create, :destroy], Ckeditor::AttachmentFile
     elsif user.role? :student
       can :read, [Document, Assignment, Begrip]
       cannot [:create, :update, :delete, :index], :all
