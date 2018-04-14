@@ -16,7 +16,9 @@ en:
       begrip:
         name: begrip
         description: beschrijving
-        synonym: synoniemen. Indien meerdere, zet er een ',' tussen!
+        related_words: Gerelateerde woorden
+      related_word:
+        name: woord
       document:
         name: interne naam, bepaalt volgorde
         slug: naam voor url

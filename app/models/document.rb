@@ -86,9 +86,14 @@ class Document < ActiveRecord::Base
   end
 
   def begrips
+    begrips = []
     content = self.content + images.all.map {|i| i.description }.join
     content.gsub!(/\/uploads\/ckeditor\/pictures\/([0-9]+)\/content_/,'/uploads/ckeditor/pictures/\1/content-')
-    content.downcase.scan(/_.+?_/).map {|x|Nokogiri::HTML.parse(x.gsub('_','')).text}.uniq.sort
+    text_begrips = content.downcase.scan(/_.+?_/).map {|x|Nokogiri::HTML.parse(x.gsub('_','')).text}
+
+    begrips << Begrip.where(name: text_begrips)
+    begrips << Begrip.joins(:related_words).where(related_words: { name: text_begrips } )
+    begrips.flatten.uniq.sort
   end
 
   def inline_forms_attribute_list

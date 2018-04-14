@@ -11,12 +11,12 @@ module ApplicationHelper
     content_begrips = content.scan(/_.+?_/).sort
     content_begrips.each do |needle|
       clean_needle = needle.gsub('_','')
-      begrip = Begrip.find_by(name: Nokogiri::HTML.parse(clean_needle).text)
+      begrip = Begrip.find_by_name(Nokogiri::HTML.parse(clean_needle).text)
       if begrip.nil?
         content = content.gsub(needle, clean_needle)
       else
         if format == 'html'
-          description = "#{begrip.description.gsub('"', "&quot;")}" + (begrip.synonym.blank? ? '' : "<br /><br />Synoniemen: #{begrip.synonym}")
+          description = "#{begrip.name}<br /><br />#{begrip.description.gsub('"', "&quot;")}" + begrip.related_words_text('<br /><br />Related words: ')
           content = content.gsub(needle, "<span data-tooltip data-options=\"hover_delay: 10;\" aria-haspopup=\"true\" class=\"has-tip radius\" title=\"#{description}\">#{clean_needle}</span>")
         elsif format == 'pdf'
           content = content.gsub(needle, "<span class='pdf_begrip'>#{clean_needle}</span>")

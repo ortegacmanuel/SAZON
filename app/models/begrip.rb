@@ -4,10 +4,17 @@ class Begrip < ActiveRecord::Base
   attr_writer :inline_forms_attribute_list
   has_paper_trail
 
+  has_many :related_words
+
   default_scope { order :name }
 
   def _presentation
-    name + (synonym.blank? ? '' : " (#{synonym})")
+    name + related_words_text('(',')')
+  end
+
+  def related_words_text(start_text='', end_text='')
+    return '' if related_words.empty?
+    "#{start_text}#{related_words.map(&:name).join(',')}#{end_text}"
   end
 
   validates :name, :presence => true
@@ -15,11 +22,18 @@ class Begrip < ActiveRecord::Base
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
       [ :name , "het begrip", :text_field ],
-      [ :synonym , "het begrip", :text_field ],
       [ :description , "de beschrijving", :text_area_without_ckeditor ],
+      [ :related_words , "het begrip", :associated ],
     ]
   end
 
+  def self.find_by_name(name)
+     find_by(name: name) || find_by_related_word(name)
+  end
+
+  def self.find_by_related_word(word)
+    Begrip.joins(:related_words).where("related_words.name = '#{word}'").first
+  end
 
   def <=>(other)
     self.name <=> other.name
