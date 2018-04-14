@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :related_words do
+  post 'revert', :on => :member
+  get 'list_versions', :on => :member
+end
+
   get 'errors/not_found'
 
   get 'errors/internal_server_error'
