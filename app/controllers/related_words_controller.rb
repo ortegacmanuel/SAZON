@@ -1,0 +1,2 @@
+class RelatedWordsController < InlineFormsController
+end
