@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180414002020) do
+ActiveRecord::Schema.define(version: 20180422025523) do
 
   create_table "assignments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20180414002020) do
     t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer "is_ism", default: 0, null: false
   end
 
   create_table "ckeditor_assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
