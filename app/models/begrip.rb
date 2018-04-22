@@ -12,12 +12,12 @@ class Begrip < ActiveRecord::Base
   scope :only_isms, -> { where(is_ism: 1) }
 
   def _presentation
-    name + related_words_text('(',')')
+    name + related_words_text('(', ')')
   end
 
   def related_words_text(start_text='', end_text='')
     return '' if related_words.empty?
-    "#{start_text}#{related_words.map(&:name).join(',')}#{end_text}"
+    "#{start_text}#{related_words.map(&:name).join(', ')}#{end_text}"
   end
 
   validates :name, :presence => true
