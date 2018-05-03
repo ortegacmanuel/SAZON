@@ -16,7 +16,7 @@ module ApplicationHelper
         content = content.gsub(needle, clean_needle)
       else
         if format == 'html'
-          description = "#{begrip.name}<br /><br />#{begrip.description.gsub('"', "&quot;")}" + begrip.related_words_text('<br /><br />Related words: ')
+          description = "#{begrip.name}<br /><br />#{begrip.description.gsub('"', "&quot;")}" + begrip.related_words_text('<br /><br />Gerelateerde begrippen: ')
           content = content.gsub(needle, "<span data-tooltip data-options=\"hover_delay: 10;\" aria-haspopup=\"true\" class=\"has-tip radius\" title=\"#{description}\">#{clean_needle}</span>")
         elsif format == 'pdf'
           content = content.gsub(needle, "<span class='pdf_begrip'>#{clean_needle}</span>")

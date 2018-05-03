@@ -24,21 +24,35 @@
 
     <% if @document.id == 33 # begrippen %>
       <div class="row content_area_begrippen">
-        <% Begrip.order(:name).each do |begrip| %>
+        <% Begrip.exclude_isms.order(:name).each do |begrip| %>
           <div class="row begrip_row">
-            <div class="column begrip_name small-2">
+            <div class="column begrip_name small-3">
               <%= begrip.name %>
             </div>
             <div class="column begrip_description small-9">
               <%= begrip.description.html_safe %>
-              <% unless begrip.synonym.blank? %>
-                <br /><br /><span class="begrip_synoniem">Synoniemen: <%= begrip.synonym %></span>
-              <% end %>
+              <%= begrip.related_words_text('<br />Gerelateerde begrippen: ').html_safe %>
             </div>
           </div>
         <% end %>
       </div>
      <% end %>
+
+     <% if @document.id == 100 # genres & stromingen %>
+       <div class="row content_area_begrippen">
+         <% Begrip.only_isms.order(:name).each do |begrip| %>
+           <div class="row begrip_row">
+             <div class="column begrip_name small-3">
+               <%= begrip.name %>
+             </div>
+             <div class="column begrip_description small-9">
+               <%= begrip.description.html_safe %>
+               <%= begrip.related_words_text('<br />Gerelateerde begrippen: ').html_safe %>
+             </div>
+           </div>
+         <% end %>
+       </div>
+      <% end %>
 
     <% unless @document.images.empty? %>
       <div class="row masonry_area">
@@ -104,40 +118,36 @@
       </div>
     <% end %>
 
-    <% unless @document.id == 33 # begrippen %>
-      <% unless @document.begrips.empty? %>
-        <div class="row begrippen">
-          <h3>BEGRIPPEN</h3>
-          <ul>
-            <% @document.begrips.each do |begrip| %>
-              <li>
-                <span data-tooltip data-options="hover_delay: 10;" aria-haspopup="true" class="has-tip tip-bottom radius" title="
-                <%= begrip.description %>
-                <%= begrip.related_words_text('<br /><br />Gerelateerde begrippen: ') %>
-                "><%= begrip.name %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+    <% unless @document.begrips.empty? %>
+      <div class="row begrippen">
+        <h3>BEGRIPPEN</h3>
+        <ul>
+          <% @document.begrips.each do |begrip| %>
+            <li>
+              <span data-tooltip data-options="hover_delay: 10;" aria-haspopup="true" class="has-tip tip-bottom radius" title="
+              <%= begrip.description %>
+              <%= begrip.related_words_text('<br /><br />Gerelateerde begrippen: ') %>
+              "><%= begrip.name %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
 
-    <% unless @document.id == 33 # begrippen %>
-      <% unless @document.isms.empty? %>
-        <div class="row isms">
-          <h3>ISMEN</h3>
-          <ul>
-            <% @document.isms.each do |ism| %>
-              <li>
-                <span data-tooltip data-options="hover_delay: 10;" aria-haspopup="true" class="has-tip tip-bottom radius" title="
-                <%= ism.description %>
-                <%= ism.related_words_text('<br /><br />Genres &amp; stromingen: ') %>
-                "><%= ism.name %></span>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+    <% unless @document.isms.empty? %>
+      <div class="row isms">
+        <h3>GENRES &amp; STROMINGEN</h3>
+        <ul>
+          <% @document.isms.each do |ism| %>
+            <li>
+              <span data-tooltip data-options="hover_delay: 10;" aria-haspopup="true" class="has-tip tip-bottom radius" title="
+              <%= ism.description %>
+              <%= ism.related_words_text('<br /><br />Gerelateerde begrippen: ') %>
+              "><%= ism.name %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   </div>
 </div>
