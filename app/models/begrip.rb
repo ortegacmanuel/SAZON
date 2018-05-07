@@ -12,7 +12,7 @@ class Begrip < ActiveRecord::Base
   scope :only_isms, -> { where(is_ism: 1) }
 
   def _presentation
-    name + related_words_text('(', ')')
+    name + related_words_text(' (', ')')
   end
 
   def related_words_text(start_text='', end_text='')
@@ -25,7 +25,7 @@ class Begrip < ActiveRecord::Base
   def inline_forms_attribute_list
     @inline_forms_attribute_list ||= [
       [ :name , "het begrip", :text_field ],
-      [ :description , "de beschrijving", :text_area_without_ckeditor ],
+      [ :description , "de beschrijving", :text_area ],
       [ :is_ism, 'is_ism', :radio_button, { 0 => 'no', 1 => 'yes' } ],
       [ :related_words , "het begrip", :associated ],
     ]
