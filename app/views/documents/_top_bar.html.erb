@@ -73,6 +73,9 @@
               <%= link_to('Download PDF', "/view/#{@document.slug}.pdf") %>
             </li>
             <li>
+              <%= link_to('Download module as PDF', "/module_view/#{@document.slug}.pdf") if @document.is_module? %>
+            </li>
+            <li>
               <%= link_to('<em>uitloggen</em>'.html_safe, destroy_user_session_path, method: :delete) %>
             </li>
             <% if current_user.role?(:superadmin) || current_user.role?(:admin) %>

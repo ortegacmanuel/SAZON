@@ -1,0 +1,10 @@
+<div class="row content_container">
+  <div class="content_area column medium-8 large-9">
+    <%= render 'documents/document' %>
+  </div>
+  <% @document.documents.each do |document| %>
+    <div class="content_area column medium-8 large-9">
+      <%= render 'documents/subdocument', document: document %>
+    </div>
+  <% end %>
+</div>

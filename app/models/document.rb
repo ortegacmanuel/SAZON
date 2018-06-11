@@ -19,6 +19,17 @@ class Document < ActiveRecord::Base
     name
   end
 
+  def content_pdf_formatted
+    # get rid of iframes
+    html_doc = Nokogiri::HTML(content)
+    html_doc.search('.//iframe').each do |iframe|
+      new_node = html_doc.create_element "span"
+      new_node.inner_html = "Video: #{iframe.attributes['src'].value.split('?').first rescue ''}"
+      iframe.replace new_node
+    end
+    html_doc.at('body').inner_html rescue ''
+  end
+
   def nice_number
     self.name.scan(/[.0-9]+/).first.gsub('0','')
   end
