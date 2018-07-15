@@ -92,7 +92,7 @@
 
     <% unless @document.sidebar.blank? %>
       <div class="row sidebar">
-        <%= raw @document.sidebar %>
+        <%= raw add_tooltips @document.sidebar, 'html' %>
       </div>
     <% end %>
 
