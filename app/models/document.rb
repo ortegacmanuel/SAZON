@@ -35,7 +35,7 @@ class Document < ActiveRecord::Base
   end
 
   def nice_begrippen_page_number
-    (documents.last.nice_number.to_f + 0.1).to_s
+    (documents.last.nice_number.to_f + 0.1).round(1).to_s
   end
 
   def nice_title
