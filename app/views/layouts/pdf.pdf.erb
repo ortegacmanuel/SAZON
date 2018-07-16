@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Sazon</title>
-    <%= stylesheet_link_tag "pdf" %>
+    <style>
+      <%= Rails.application.assets.find_asset('pdf.scss').to_s %>
+    </style>
 
     <script>/* foo */</script>
   </head>
