@@ -67,6 +67,7 @@ class DocumentsController < InlineFormsController
     @document = Document.find_by(slug: params[:slug])
     @begrips = @document.module_begrips
     @isms = @document.module_isms
+    @module_begrips_page = @document
     render layout: 'view'
   end
 

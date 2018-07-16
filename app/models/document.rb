@@ -34,6 +34,10 @@ class Document < ActiveRecord::Base
     self.name.scan(/[.0-9]+/).first.gsub('0','')
   end
 
+  def nice_begrippen_page_number
+    (documents.last.nice_number.to_f + 0.1).to_s
+  end
+
   def nice_title
     nice_number.length > 1 ? "#{nice_number} #{title}" : title
   end
