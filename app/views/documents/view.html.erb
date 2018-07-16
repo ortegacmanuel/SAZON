@@ -3,8 +3,16 @@
   <div class="content_area column medium-8 large-9">
     <div class="row navigation">
       <div class="right">
-        <%= link_to image_tag('previous.png', id: "previous_button"), "/view/#{@document.previous.slug}" unless @document.previous.nil? %>
-        <%= link_to image_tag('next.png', id: "next_button"), "/view/#{@document.next.slug}" unless @document.next.nil? %>
+        <% if @document.is_module? && @document.previous && @document.previous.module_any_begrip_or_ism?  %>
+          <%= link_to image_tag('previous.png', id: "previous_button"), "/module_begrips/#{@document.previous.slug}" unless @document.previous.nil? %>
+        <% else %>
+          <%= link_to image_tag('previous.png', id: "previous_button"), "/view/#{@document.previous.slug}" unless @document.previous.nil? %>
+        <% end %>
+        <% if @document.is_module_last_document? && @document.module_any_begrip_or_ism?  %>
+          <%= link_to image_tag('next.png', id: "next_button"), "/module_begrips/#{@document.slug}" %>
+        <% else %>
+          <%= link_to image_tag('next.png', id: "next_button"), "/view/#{@document.next.slug}" unless @document.next.nil? %>
+        <% end %>
       </div>
     </div>
 

@@ -1,16 +1,13 @@
+<%= render 'top_bar' %>
 <div class="row content_container">
   <div class="content_area column medium-8 large-9">
-    <%= render 'documents/document' %>
-  </div>
-  <% @document.documents.each do |document| %>
-    <div class="content_area column medium-8 large-9">
-      <%= render 'documents/subdocument', document: document %>
+    <div class="row navigation">
+      <div class="right">
+        <%= link_to image_tag('previous.png', id: "previous_button"), "/view/#{@document.slug}" unless @document.previous.nil? %>
+        <%= link_to image_tag('next.png', id: "next_button"), "/view/#{@document.next.slug}" unless @document.next.nil? %>
+      </div>
     </div>
-  <% end %>
-</div>
 
-<% if @document.module_any_begrip_or_ism? %>
-  <div class="content_area column medium-8 large-9">
     <div class="row content_area_title_above">
       <h1 class="title">
         List of begrips and isms for: <%= @document.this_module.title %>
@@ -19,10 +16,10 @@
 
     <div class="row content_area_begrippen">
       <h2>Genres & Stromingen</h2>
-      <% @document.module_isms.each do |ism| %>
+      <% @isms.each do |ism| %>
         <div class="row begrip_row">
           <div class="column begrip_name small-3">
-            <h3><%= ism.name %></h3>
+            <%= ism.name %>
           </div>
           <div class="column begrip_description small-9">
             <%= ism.description.html_safe %>
@@ -34,10 +31,10 @@
 
     <div class="row content_area_begrippen">
       <h2>Begrippen</h2>
-      <% @document.module_begrips.each do |begrip| %>
+      <% @begrips.each do |begrip| %>
         <div class="row begrip_row">
           <div class="column begrip_name small-3">
-            <h3><%= begrip.name %></h3>
+            <%= begrip.name %>
           </div>
           <div class="column begrip_description small-9">
             <%= begrip.description.html_safe %>
@@ -46,5 +43,15 @@
         </div>
       <% end %>
     </div>
+
   </div>
+
+  <div class="sidebar_area column medium-4 large-3">
+  </div>
+</div>
+<% content_for :javascript do %>
+  // Needed reinitialization in order to fix overlapping item elements
+  $( window ).load(function() {
+    $('.masonry_area').masonry({ "itemSelector": ".masonry_image", "columnWidth": <%= @masonry_column_width %>, gutter: 1 })
+  });
 <% end %>
