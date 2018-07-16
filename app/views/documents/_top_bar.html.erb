@@ -34,15 +34,18 @@
             <li class="has-dropdown"><%= link_to this_module.nice_title, "/view/#{this_module.slug}" %>
               <ul class="dropdown" tabindex="-1">
                 <% this_module.documents.each do |document| %>
-                <li<%= " class=active" if document.id == this_chapter.id %>>
+                <li<%= " class=active" if document.id == this_chapter.id  && @module_begrips_page.nil? %>>
                   <%= link_to document.nice_title, "/view/#{document.slug}" %>
                 </li>
                 <% end %>
+                <li <%= " class=active" if @module_begrips_page && @module_begrips_page.id == @document.id %>>
+                  <%= link_to "#{this_module.nice_begrippen_page_number} Begrippen", "/module_begrips/#{this_module.module_and_children.last.slug}" %>
+                </li>
               </ul>
             </li>
           <% end %>
         <% end %>
-        <% unless this_chapter.is_root? %>
+        <% unless this_chapter.is_root? || !@module_begrips_page.nil? %>
           <% if this_chapter.children.empty? %>
             <li>
               <%= link_to this_chapter.nice_title, "/view/#{this_chapter.slug}" %>
