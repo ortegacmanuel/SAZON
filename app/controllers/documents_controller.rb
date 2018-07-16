@@ -63,6 +63,12 @@ class DocumentsController < InlineFormsController
     end
   end
 
+  def module_begrips
+    @document = Document.find_by(slug: params[:slug])
+    @begrips = @document.module_begrips
+    @isms = @document.module_isms
+    render layout: 'view'
+  end
 
   # def css
   #   render body: Document.find(ROOT_ID).css, content_type: "text/css"

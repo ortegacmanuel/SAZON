@@ -70,6 +70,7 @@ end
   match '/view', to: redirect('/view/sazon'), :via => :all
   get '/view/:slug', to: 'documents#view', constraints: { slug: Rails.configuration.slug_regex }
   get '/module_view/:slug', to: 'documents#module_view', constraints: { slug: Rails.configuration.slug_regex }
+  get '/module_begrips/:slug', to: 'documents#module_begrips', constraints: { slug: Rails.configuration.slug_regex }
 
   match "/404", to: redirect('/view/not_found'), :via => :all
 

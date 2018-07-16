@@ -77,6 +77,13 @@ class Document < ActiveRecord::Base
     position < 0 ? nil : root_and_children[position]
   end
 
+  def module_and_children
+    [self.this_module, self.this_module.children].flatten
+  end
+
+  def is_module_last_document?
+    self.id == module_and_children.last.id
+  end
 
   def is_root?
     self.id == ROOT_ID
@@ -94,6 +101,26 @@ class Document < ActiveRecord::Base
   def this_chapter
     return Document.find(ROOT_ID) if self.is_module? || self.is_root? || self.has_no_parent?
     parent.is_module? ? self : parent.this_chapter
+  end
+
+  def module_begrips
+    module_and_children.map {|d| d.begrips }.flatten.uniq.sort
+  end
+
+  def module_isms
+    module_and_children.map {|d| d.isms }.flatten.uniq.sort
+  end
+
+  def module_with_begrips?
+    module_and_children.detect {|d| d.begrips.count > 0 }
+  end
+
+  def module_with_isms?
+    module_and_children.detect {|d| d.isms.count > 0 }
+  end
+
+  def module_any_begrip_or_ism?
+    module_with_begrips? || module_with_isms?
   end
 
   def begrips
