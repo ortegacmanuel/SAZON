@@ -111,7 +111,7 @@ class Document < ActiveRecord::Base
   end
 
   def text_begrips
-    content = self.content + images.all.map {|i| i.description }.join
+    content = self.content + self.sidebar + images.all.map {|i| i.description }.join
     content.gsub!(/\/uploads\/ckeditor\/pictures\/([0-9]+)\/content_/,'/uploads/ckeditor/pictures/\1/content-')
     content.downcase.scan(/_.+?_/).map {|x|Nokogiri::HTML.parse(x.gsub('_','')).text}
   end
