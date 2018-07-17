@@ -1,8 +1,19 @@
+/* Page Breaks */
+.pb_before { page-break-before:always !important; }
+.pb_after  { page-break-after:always !important; }
+.pbi_avoid { page-break-inside:avoid !important; }
+
+/*
+
 @import url(https://fonts.googleapis.com/css?family=Dosis:400,400italic);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic);
 
+*/
 
 /* Reset CSS. http://yui.yahooapis.com/3.2.0/build/cssreset/reset-min.css  */
+
+/*
+
 html{color:#000;background:#FFF;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
 table{border-collapse:collapse;border-spacing:0;width: 100%;}
@@ -13,11 +24,6 @@ caption,th{text-align:left;}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
 q:before,q:after{content:'';}
 legend{color:#000;}
-
-/* Page Breaks */
-.pb_before { page-break-before:always !important; }
-.pb_after  { page-break-after:always !important; }
-.pbi_avoid { page-break-inside:avoid !important; }
 
 #sazon_pdf_outer_container {
 
@@ -61,13 +67,11 @@ legend{color:#000;}
 
 .pdf_masonry_image {
   float: left;
-  padding: 20px 25px 0 0;
+  padding: 5px 25px 0 0;
 }
 .pdf_masonry_content {
   float: left;
   width: 70%;
-  padding: 20px 0 0 0;
-
 }
 
 .content_area.column.medium-8.large-9 {
@@ -140,3 +144,5 @@ legend{color:#000;}
 .masonry_image {
   margin-top: 10px !important;
 }
+
+*/

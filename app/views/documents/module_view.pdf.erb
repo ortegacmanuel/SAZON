@@ -3,14 +3,14 @@
     <%= render 'documents/document' %>
   </div>
   <% @document.documents.each do |document| %>
-    <div class="content_area column medium-8 large-9">
+    <div class="content_area column medium-8 large-9 pb_before">
       <%= render 'documents/subdocument', document: document %>
     </div>
   <% end %>
 </div>
 
 <% if @document.module_any_begrip_or_ism? %>
-  <div class="content_area column medium-8 large-9">
+  <div class="content_area column medium-8 large-9 pb_before">
     <div class="row content_area_title_above">
       <h1 class="title">
         List of begrips and isms for: <%= @document.this_module.title %>
