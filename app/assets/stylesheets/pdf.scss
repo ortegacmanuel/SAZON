@@ -1,18 +1,7 @@
-/* Page Breaks */
-.pb_before { page-break-before:always !important; }
-.pb_after  { page-break-after:always !important; }
-.pbi_avoid { page-break-inside:avoid !important; }
-
-/*
-
 @import url(https://fonts.googleapis.com/css?family=Dosis:400,400italic);
 @import url(https://fonts.googleapis.com/css?family=Roboto:400,400italic);
 
-*/
-
 /* Reset CSS. http://yui.yahooapis.com/3.2.0/build/cssreset/reset-min.css  */
-
-/*
 
 html{color:#000;background:#FFF;}
 body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
@@ -145,4 +134,7 @@ legend{color:#000;}
   margin-top: 10px !important;
 }
 
-*/
+/* Page Breaks */
+.pb_before { page-break-before:always !important; }
+.pb_after  { page-break-after:always !important; }
+.pbi_avoid { page-break-inside:avoid !important; }
