@@ -7,7 +7,9 @@ class Bestand < ApplicationRecord
   has_paper_trail
 
   validates :name, presence: true
-  validates :slug, presence: true, format: { with: Regexp.new('\A' + SLUG_FORMAT.source + '\z'), message: "begint met een kleine letter en daarna kleine letters, koppelteken en cijfers" }
+  validates :slug, presence: true,
+                   uniqueness: true,
+                   format: { with: Regexp.new('\A' + SLUG_FORMAT.source + '\z'), message: "begint met een kleine letter en daarna kleine letters, koppelteken en cijfers" }
 
   mount_uploader :file, FileUploader
 
