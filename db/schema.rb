@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422025523) do
+ActiveRecord::Schema.define(version: 20180902161612) do
 
   create_table "assignments", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string "name"
@@ -27,6 +27,14 @@ ActiveRecord::Schema.define(version: 20180422025523) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer "is_ism", default: 0, null: false
+  end
+
+  create_table "bestands", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string "name"
+    t.string "slug"
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "ckeditor_assets", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -146,6 +154,7 @@ ActiveRecord::Schema.define(version: 20180422025523) do
     t.string "whodunnit"
     t.text "object", limit: 4294967295
     t.datetime "created_at"
+    t.text "object_changes"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 

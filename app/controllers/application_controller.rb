@@ -11,7 +11,7 @@ class ApplicationController < InlineFormsApplicationController
     redirect_to '/view/not_found'
   end
 
-  ActionView::CompiledTemplates::MODEL_TABS = %w(assignments documents users begrips)
+  ActionView::CompiledTemplates::MODEL_TABS = %w(bestands assignments documents users begrips)
 
   # Uncomment next line if you want I18n (based on subdomain)
   # before_action :set_locale

@@ -1,4 +1,5 @@
 class Document < ActiveRecord::Base
+  include BaseUrlHelper
   attr_reader :per_page
   @per_page = 999
   attr_writer :inline_forms_attribute_list
@@ -11,7 +12,9 @@ class Document < ActiveRecord::Base
   has_many :images
 
   validates :name, presence: true
-  validates :slug, presence: true, format: { with: Rails.configuration.slug_regex, message: "begint met een kleine letter en daarna kleine letters, underscore en cijfers" }
+  validates :slug, presence: true,
+                   uniqueness: true,
+                   format: { with: Rails.configuration.slug_regex, message: "begint met een kleine letter en daarna kleine letters, underscore en cijfers" }
 
   default_scope { order :name }
 
@@ -61,11 +64,7 @@ class Document < ActiveRecord::Base
   end
 
   def url
-    if Rails.env.production?
-      "https://sazon.id-arte.net/view/#{slug}"
-    else
-      "http://127.0.0.1:3001/view/#{slug}"
-    end
+    build_url("view/#{slug}")
   end
 
   def root_and_children
