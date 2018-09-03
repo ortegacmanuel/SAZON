@@ -82,7 +82,7 @@
               <%= link_to('<em>uitloggen</em>'.html_safe, destroy_user_session_path, method: :delete) %>
             </li>
             <% if current_user.role?(:superadmin) || current_user.role?(:admin) %>
-              <% %w(documents begrips assignments users).each do |model| %>
+              <% %w(documents begrips assignments bestands users).each do |model| %>
                 <li>
                   <%= link_to "-> #{model}", send("#{model}_path") %>
                 </li>
