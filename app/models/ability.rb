@@ -17,13 +17,16 @@ class Ability
     elsif user.role? :admin
         can :access_but_not_delete, :all
         can :view, Document
-        can :destroy, [Begrip, Assignment, Image]
+        can :destroy, [Begrip, Assignment, Image, Bestand]
+        can :download, Bestand
         can :access, :ckeditor   # needed to access Ckeditor filebrowser
         # Performed checks for actions:
         can [:read, :create, :destroy], Ckeditor::Picture
         can [:read, :create, :destroy], Ckeditor::AttachmentFile
+        can :download, Bestand
     elsif user.role? :student
       can :read, [Document, Assignment, Begrip]
+      can :download, Bestand
       cannot [:create, :update, :delete, :index], :all
       can :view, Document
     end
